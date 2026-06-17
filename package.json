@@ -1,0 +1,46 @@
+{
+  "name": "posokanei-mcp",
+  "version": "0.1.0",
+  "mcpName": "io.github.charistas/posokanei-mcp",
+  "description": "Unofficial read-only MCP server for Greek supermarket price data from PosoKanei.",
+  "type": "module",
+  "bin": {
+    "posokanei-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc && chmod 755 dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "prepublishOnly": "npm test"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "posokanei",
+    "greece",
+    "supermarket",
+    "prices"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charistas/posokanei-mcp.git"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.1",
+    "typescript": "^5.9.3"
+  }
+}
