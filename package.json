@@ -1,6 +1,6 @@
 {
   "name": "posokanei-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "mcpName": "io.github.charistas/posokanei-mcp",
   "description": "Unofficial read-only MCP server for Greek supermarket price data from PosoKanei.",
   "type": "module",
