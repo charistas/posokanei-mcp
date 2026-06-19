@@ -18,7 +18,7 @@ This project is not affiliated with, endorsed by, or operated by PosoKanei, gov.
 
 ## Installation
 
-After the package is published to npm:
+Add it to your MCP client configuration:
 
 ```json
 {
@@ -86,15 +86,6 @@ npm test
 ```
 
 The test suite mocks the PosoKanei API. It should not require live network access.
-
-## Publishing
-
-1. Commit and push the repository to GitHub.
-2. Publish the npm package.
-3. Publish `server.json` with `mcp-publisher`.
-
-`package.json` already declares `mcpName`, and `server.json` is configured for `io.github.charistas/posokanei-mcp`.
-The MCP Registry hosts metadata, not package artifacts. Users still install the npm package.
 
 ## License
 

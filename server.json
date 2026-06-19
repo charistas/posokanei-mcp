@@ -17,6 +17,13 @@
       },
       "environmentVariables": [
         {
+          "name": "POSOKANEI_API_BASE",
+          "description": "Optional PosoKanei API base URL override.",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": false
+        },
+        {
           "name": "POSOKANEI_CACHE_TTL_MS",
           "description": "Optional cache TTL in milliseconds.",
           "isRequired": false,
@@ -26,6 +33,13 @@
         {
           "name": "POSOKANEI_MIN_INTERVAL_MS",
           "description": "Optional minimum delay between outbound PosoKanei API requests.",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": false
+        },
+        {
+          "name": "POSOKANEI_TIMEOUT_MS",
+          "description": "Optional outbound request timeout in milliseconds.",
           "isRequired": false,
           "format": "string",
           "isSecret": false

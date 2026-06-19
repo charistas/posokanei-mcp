@@ -26,8 +26,12 @@
     "supermarket",
     "prices"
   ],
-  "author": "",
+  "author": "charistas",
   "license": "MIT",
+  "homepage": "https://github.com/charistas/posokanei-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/charistas/posokanei-mcp/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/charistas/posokanei-mcp.git"
