@@ -10,10 +10,13 @@ This project is not affiliated with, endorsed by, or operated by PosoKanei, gov.
 
 ## Commands
 
+On this laptop, use `socket npm` / `socket npx` for registry installs, updates, resolution, and package execution. Plain `npm run` (and `npm test`) may run checked-in local scripts; nested registry operations must still use Socket. If Socket is unavailable or blocks an operation, report the blocker rather than bypassing it. On other hosts, follow their approved package security workflow.
+
+
 Requires Node.js `>=20`.
 
 ```sh
-npm install
+socket npm install
 npm run build
 npm run typecheck
 npm test
