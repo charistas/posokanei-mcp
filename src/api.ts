@@ -248,7 +248,17 @@ export class PosoKaneiClient {
         );
       }
 
-      const value = responseText.length ? (JSON.parse(responseText) as T) : (null as T);
+      let value: T;
+      try {
+        value = responseText.length ? (JSON.parse(responseText) as T) : (null as T);
+      } catch {
+        throw new PosoKaneiApiError(
+          `PosoKanei API returned a non-JSON response (HTTP ${response.status}): ${responseText.slice(0, 500)}`,
+          response.status,
+          responseText,
+        );
+      }
+
       this.cache.set(cacheKey, {
         expiresAt: Date.now() + this.cacheTtlMs,
         value,
@@ -401,6 +411,9 @@ function messageForStatus(status: number, responseText: string): string {
   }
   if (status >= 500) {
     return "PosoKanei API server error";
+  }
+  if (status === 401 || status === 403) {
+    return `PosoKanei API refused the request (HTTP ${status}). The service may block this client or network.`;
   }
   return `PosoKanei API request failed with status ${status}: ${responseText.slice(0, 500)}`;
 }

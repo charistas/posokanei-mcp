@@ -41,7 +41,7 @@ export function createServer(client = new PosoKaneiClient()): McpServer {
       description:
         "Search PosoKanei supermarket products by Greek or English product text. Returns current price summaries and retailer prices.",
       inputSchema: {
-        query: z.string().min(1).describe("Product search text, for example 'γάλα' or 'feta'."),
+        query: z.string().trim().min(1).describe("Product search text, for example 'γάλα' or 'feta'."),
         page: z.number().int().min(1).default(1).describe("Result page."),
         pageSize: z
           .number()

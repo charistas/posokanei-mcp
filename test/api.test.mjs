@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { PosoKaneiClient, simplifyCategoryTree } from "../dist/api.js";
+import { PosoKaneiApiError, PosoKaneiClient, simplifyCategoryTree } from "../dist/api.js";
 
 test("searchProducts posts the expected payload and caches the response", async () => {
   const requests = [];
@@ -199,6 +199,49 @@ test("requests reserve rate-limit slots under concurrent load", async () => {
   assert.ok(
     requestTimes[2] - requestTimes[1] >= 15,
     `expected third request to be spaced, got ${requestTimes[2] - requestTimes[1]}ms`
+  );
+});
+
+test("a non-JSON 200 response is reported as a protocol error, not a network error", async () => {
+  const body = "<html>not json</html>";
+  const client = new PosoKaneiClient({
+    baseUrl: "https://example.test",
+    fetchImpl: async () => new Response(body, { status: 200 }),
+    minIntervalMs: 0
+  });
+
+  await assert.rejects(
+    client.getStats(),
+    (error) => {
+      assert.ok(error instanceof PosoKaneiApiError);
+      assert.equal(error.status, 200);
+      assert.equal(error.responseBody, body);
+      assert.match(error.message, /non-JSON response \(HTTP 200\)/);
+      return true;
+    },
+    "expected a non-JSON 200 body to fail as a protocol error"
+  );
+});
+
+test("a refused request reports the status without echoing the upstream body", async () => {
+  const body = "<!doctype html><title>403</title>403 Forbidden";
+  const client = new PosoKaneiClient({
+    baseUrl: "https://example.test",
+    fetchImpl: async () => new Response(body, { status: 403 }),
+    minIntervalMs: 0
+  });
+
+  await assert.rejects(
+    client.getStats(),
+    (error) => {
+      assert.ok(error instanceof PosoKaneiApiError);
+      assert.equal(error.status, 403);
+      assert.equal(error.responseBody, body);
+      assert.match(error.message, /refused the request \(HTTP 403\)/);
+      assert.doesNotMatch(error.message, /<!doctype html>/);
+      return true;
+    },
+    "expected a 403 to fail with a short message"
   );
 });
 
