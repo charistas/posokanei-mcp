@@ -1,5 +1,8 @@
 # posokanei-mcp
 
+> **Unmaintained / deprecated — 14 November 2026**
+> This was a personal experiment and is no longer maintained. No further updates, security fixes, or support are planned. The npm package and MCP Registry listing are being deprecated; the source remains available for reference under its existing license. Do not rely on this project for a maintained integration.
+
 Unofficial read-only MCP server for supermarket product and price data from [PosoKanei](https://posokanei.gov.gr/).
 
 This server lets MCP-compatible clients ask questions such as:
